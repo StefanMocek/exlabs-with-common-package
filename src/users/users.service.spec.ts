@@ -11,6 +11,7 @@ describe('UsersService', () => {
     userModelServiceMock = {
       getAllUsers: jest.fn(),
       getOneById: jest.fn(),
+      getOneByEmail: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
       delete: jest.fn(),
@@ -74,6 +75,7 @@ describe('UsersService', () => {
       };
       const createdUser = {...createUserDto, _id: 'created-user-id'};
       (userModelServiceMock.create as jest.Mock).mockResolvedValue(createdUser);
+      (userModelServiceMock.getOneByEmail as jest.Mock).mockResolvedValue(undefined);
 
       const result = await usersService.createUser(createUserDto);
 

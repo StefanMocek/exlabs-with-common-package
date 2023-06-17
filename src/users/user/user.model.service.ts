@@ -8,6 +8,10 @@ export class UserModelService {
     return await this.userModel.findOne({_id: userId});
   };
 
+  async getOneByEmail(userEmail: string): Promise<UserDoc | null> {
+    return await this.userModel.findOne({email: userEmail});
+  };
+
   async getAllUsers(roleQuery?: string): Promise<UserDoc[] | null> {
     if (!roleQuery) {
       return await this.userModel.find({});

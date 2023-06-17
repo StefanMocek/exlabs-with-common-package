@@ -19,11 +19,7 @@ export class AppModule {
   constructor(public app: Application, private dbUri: string, private swwagerDocPath: string) {
     //basic settings
     app.set('trust proxy', true);
-    app.use(cors({
-      credentials: true,
-      origin: process.env.CLIENT_ORIGIN || '*',
-      optionsSuccessStatus: 200
-    }))
+    app.use(cors({ origin: "https://exlabs-recruitment-task-sm-547879cea589.herokuapp.com/", credentials: true }));
     app.use(express.urlencoded({extended: false}));
     app.use(express.json());
     app.use(cookieSession({

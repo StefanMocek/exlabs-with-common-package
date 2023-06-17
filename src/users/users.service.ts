@@ -20,7 +20,12 @@ export class UsersService {
     return user;
   };
 
-  createUser(createUserDto: CreateUserDto): Promise<UserDoc> {
+  async createUser(createUserDto: CreateUserDto): Promise<UserDoc | BadRequestError> {
+    const user = await this.userModelService.getOneByEmail(createUserDto.email);
+    if (user) {
+      return new BadRequestError('Email already in use');
+    };
+
     return this.userModelService.create(createUserDto);
   };
 

@@ -4,7 +4,7 @@ info:
   contact: {}
   version: '1.0'
 servers:
-- url: http://localhost:3000/api
+- url: https://exlabs-recruitment-task-sm-547879cea589.herokuapp.com/api
   variables: {}
 paths:
   /auth/logout:

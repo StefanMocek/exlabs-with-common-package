@@ -1,7 +1,7 @@
 import {UserModelService} from './user/user.model.service';
 import {CreateUserDto, UpdateUserDto, DeleteUserDto} from './dtos/user.dto';
 import {UsersService} from './users.service';
-import {NotFoundError, BadRequestError} from '../utils/errors';
+import {NotFoundError, BadRequestError} from '@exlabs-recruitment-task-sm-common/coomon/build';
 
 describe('UsersService', () => {
   let usersService: UsersService;

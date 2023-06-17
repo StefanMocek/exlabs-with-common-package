@@ -1,0 +1,259 @@
+openapi: 3.0.0
+info:
+  title: Exlabs reqruitment task
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://localhost:3000/api
+  variables: {}
+paths:
+  /auth/logout:
+    get:
+      tags:
+      - Auth
+      summary: Logout
+      operationId: Logout
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/current-user:
+    get:
+      tags:
+      - Auth
+      summary: Current user
+      operationId: Currentuser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterRequest'
+              - example:
+                  email: test3@gmail.com
+                  password: haslo123
+            example:
+              email: test3@gmail.com
+              password: haslo123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginRequest'
+              - example:
+                  email: test@gmail.com
+                  password: haslo123
+            example:
+              email: test@gmail.com
+              password: haslo123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /users:
+    get:
+      tags:
+      - Users
+      summary: Get All Users
+      operationId: GetAllUsers
+      parameters:
+      - name: role
+        in: query
+        description: ''
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum: ['user', 'admin']
+          example: user
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user:
+    post:
+      tags:
+      - Users
+      summary: Create User
+      operationId: CreateUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateUserRequest'
+              - example:
+                  firstName: test name
+                  lastName: test last
+                  email: test123@test.com
+                  role: user
+            example:
+              firstName: test name
+              lastName: test last
+              email: test123@test.com
+              role: user
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    patch:
+      tags:
+      - Users
+      summary: Update User
+      operationId: UpdateUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateUserRequest'
+              - example:
+                  lastName: lastName changed
+            example:
+              lastName: lastName changed
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Users
+      summary: Get One User
+      operationId: GetOneUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Users
+      summary: Delete User
+      operationId: DeleteUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisterRequest:
+      title: Register Request
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: test3@gmail.com
+        password: haslo123
+    LoginRequest:
+      title: Login Request
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: test@gmail.com
+        password: haslo123
+    CreateUserRequest:
+      title: Create User Request
+      required:
+      - email
+      - role
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+      example:
+        firstName: test name
+        lastName: test last
+        email: test123@test.com
+        role: user
+    UpdateUserRequest:
+      title: Update User Request
+      type: object
+      properties:
+        lastName:
+          type: string
+        firstName:
+          type: string
+        role:
+          type: string
+      example:
+        lastName: lastName changed
+tags:
+- name: Auth
+- name: Users

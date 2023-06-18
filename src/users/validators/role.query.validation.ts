@@ -1,17 +1,17 @@
-import {ValidationChain, query} from 'express-validator';
+import { ValidationChain, query } from "express-validator";
 
 export const roleQueryValidation: ValidationChain[] = [
-  query('role')
+  query("role")
     .optional()
     .custom((value) => {
       if (!value) {
         return true;
-      };
+      }
 
-      if (value === 'admin' || value === 'user') {
+      if (value === "admin" || value === "user") {
         return true;
-      };
+      }
 
-      throw new Error('Invalid role query');
+      throw new Error("Invalid role query");
     }),
 ];

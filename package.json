@@ -8,17 +8,18 @@
     "compile": "tsc && node ./dist/src/app.js",
     "start:dev": "nodemon -e ts --exec \"npm run compile\"",
     "start": "node ./dist/src/app.js",
-    "test": "jest --runInBand --detectOpenHandles"
+    "test:unit": "jest --runInBand --detectOpenHandles --setupFilesAfterEnv './src/db-tests-setup/setupTests.ts'",
+    "test:e2e": "JWT_KEY=sampleKey jest --runInBand --detectOpenHandles --testRegex \\.spec\\.e2e\\.ts$",
+    "test": "npm run test:unit && npm run test:e2e",
+    "prettier": "prettier 'src/**/*.ts'",
+    "prettier:fix": "prettier --write 'src/**/*.ts'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node",
-    "setupFilesAfterEnv": [
-      "./src/db-tests-setup/setupTests.ts"
-    ]
+    "testEnvironment": "node"
   },
   "dependencies": {
     "@exlabs-recruitment-task-sm-common/coomon": "^1.0.3",
@@ -44,6 +45,7 @@
     "jest": "^29.5.0",
     "mongodb-memory-server": "^8.13.0",
     "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "typescript": "^5.1.3"
